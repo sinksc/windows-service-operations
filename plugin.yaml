@@ -1,0 +1,25 @@
+name: windows-service-operations
+version: 1.0.0
+rundeckPluginVersion: 1.2
+author: sinksc
+date: Wed April 24 2024
+providers:
+  - name: windows-service-operations-step
+    service: RemoteScriptNodeStep
+    title: 'windows / service / operations'
+    description: 'Start, stop, restart, or check the status of a Windows service'
+    plugin-type: script
+    script-interpreter: powershell -Command
+    script-file: checkWindowsService.ps1
+    script-args: -ServiceName "'${config.service_name}'" -Operation "'${config.operation}'"
+    config:
+      - type: String
+        name: service_name
+        title: Service Name*
+        description: 'Name of the Windows service. Ex: Apache Tomcat 9.0 Tomcat9'
+        required: true        
+      - type: String
+        name: operation
+        title: Operation*
+        description: 'Operation Name'
+        required: true

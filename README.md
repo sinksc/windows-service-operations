@@ -55,7 +55,7 @@ RUNDECK:DATA:SERVICE_STATUS=Running
 RUNDECK:DATA:EXIT_CODE=0
 ```
 
-If you add a Key Value Data log filter on the step that uses this plugin, you can create a subsequent step to evaluate it. For example, here is an inline powershell script that will evaluate `SERVICE_STATUS` if the operation was `status`:
+If you add a Key Value Data log filter on the step that uses this plugin, you can create a subsequent step in your job to evaluate it. For example, here is an inline powershell script that will evaluate `SERVICE_STATUS` if the operation was `status`:
 
 ``` powershell
 # If this was a status check and the service is not running...
@@ -65,7 +65,7 @@ if ("status" -eq "@option.Operation@" -and "@data.SERVICE_STATUS@" -ne "Running"
 }
 ```
 
-Set Invocation String to `powershell` and File Extension to `ps1` in this example step.:w
+Set Invocation String to `powershell` and File Extension to `ps1` in this example step.
 
 ## Building
 

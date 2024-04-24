@@ -41,6 +41,32 @@ This step returns the following exit codes:
 |      1     | Fail. The specified service was not found. |
 |      2     | Fail. The specified operation is not allowed. |
 
+### Log Filters
+Key-Value Data log filters can be used for the following keys:
+- SERVICE_STATUS
+  - This only appears when running the `status` operation
+- EXIT_CODE
+
+Example output:
+
+```  powershell
+The status of service 'Apache Tomcat 9.0 Tomcat9' is Running.
+RUNDECK:DATA:SERVICE_STATUS=Running
+RUNDECK:DATA:EXIT_CODE=0
+```
+
+If you add a Key Value Data log filter on the step that uses this plugin, you can create a subsequent step to evaluate it. For example, here is an inline powershell script that will evaluate `SERVICE_STATUS` if the operation was `status`:
+
+``` powershell
+# If this was a status check and the service is not running...
+if ("status" -eq "@option.Operation@" -and "@data.SERVICE_STATUS@" -ne "Running") {
+    Write-Host "Caught status of @data.SERVICE_STATUS@!"
+    # Perform actions here...
+}
+```
+
+Set Invocation String to `powershell` and File Extension to `ps1` in this example step.:w
+
 ## Building
 
 1. To build the plugin, simply move up a directory and zip it but, exclude the .git files:

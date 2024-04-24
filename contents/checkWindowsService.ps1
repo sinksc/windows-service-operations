@@ -45,6 +45,7 @@ if ($exit_code -le 0) {
         }
         'status' {
             Write-Host "The status of service '$ServiceName' is $($service.Status)."
+            Write-Host "RUNDECK:DATA:SERVICE_STATUS=$($service.Status)"
         }
         default {
             Write-Host "Invalid operation '$Operation'. Should be one of: Status/Start/Stop/Restart"
@@ -53,5 +54,5 @@ if ($exit_code -le 0) {
     }
 }
 
-Write-Output "RUNDECK:DATA:EXIT_CODE=$exit_code"
+Write-Host "RUNDECK:DATA:EXIT_CODE=$exit_code"
 exit $exit_code

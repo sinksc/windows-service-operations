@@ -8,8 +8,8 @@ param(
 )
 
 # Trim leading spaces 
-$ServiceName = $ServiceName.TrimStart()
-$Operation = $Operation.TrimStart()
+$ServiceName = $ServiceName.Trim()
+$Operation = $Operation.Trim()
 
 $exit_code = 0
 
